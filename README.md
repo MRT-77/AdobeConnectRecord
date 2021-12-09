@@ -3,6 +3,17 @@
   <h1>Adobe Connect Record</h1>
 </div>
 
+### Installation
+
+1. Go to adobe connect installation directory by right click on adobe connect shortcut icon and click on Open File Location
+2. Rename original file `connect.exe` to `adobeconnect.exe`
+3. Copy this program to the same folder
+
+### Usage
+
+1. Open your browser and open a recorded webianr then adobe connect will start automatically
+2. A console window will show up and it asks you to enter the recording mode or not then type Yes or Y then press enter.
+
 ### Note
 
 - This icon is used only to maintain the appearance of shortcuts on the desktop and the original logo belongs to Adobe.
