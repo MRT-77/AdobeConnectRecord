@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace AdobeConnectRecord
 {
@@ -11,23 +12,37 @@ namespace AdobeConnectRecord
         private const string ModeNormal = "pbMode=normal";
         private const string ModeOffline = "pbMode=offline";
 
+        private static string NewLine => Environment.NewLine;
+
         internal static void Main(string[] args)
         {
+            var localDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
             // Concat all arguments with a single space character
             var allArgs = string.Join(" ", args);
 
-            if (!string.IsNullOrWhiteSpace(allArgs) && allArgs.Contains(ModeNormal))
+            if (!string.IsNullOrWhiteSpace(allArgs))
             {
-                Console.Write("Use DOWNLOAD Mode? [Yes|No]");
+#if DEBUG
+                // Write arguments in log file
+                File.AppendAllText(Path.Combine(localDir, "log.txt"),
+                    $"{DateTime.Now:s}{NewLine}{allArgs}{NewLine}{NewLine}",
+                    Encoding.UTF8);
+#endif
 
-                // Check user answer
-                var answer = Console.ReadLine().ToLower();
-                if (answer == "yes" || answer == "y")
-                    allArgs = allArgs.Replace(ModeNormal, ModeOffline);
+                if (allArgs.Contains(ModeNormal))
+                {
+                    Console.Write("Use Record Mode? [yes/No] ");
+
+                    // Check user answer
+                    var answer = Console.ReadLine().ToLower();
+                    if (answer == "yes" || answer == "y")
+                        allArgs = allArgs.Replace(ModeNormal, ModeOffline);
+                }
             }
 
             // Make full path to FileName
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), FileName);
+            var path = Path.Combine(localDir, FileName);
 
             // Check Before Execute
             if (!File.Exists(path))
