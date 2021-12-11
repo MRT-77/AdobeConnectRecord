@@ -3,6 +3,10 @@
   <h1>Adobe Connect Record</h1>
 </div>
 
+### Requirements
+ - Adobe Connect (any version)
+ - Microsoft .Net Freamework 4.0 (pre installed on windows 7 sp1 and higher)
+
 ### Installation
 
 1. Go to adobe connect installation directory by right click on adobe connect shortcut icon and click on Open File Location
